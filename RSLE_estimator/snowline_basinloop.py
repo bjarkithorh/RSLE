@@ -13,16 +13,15 @@ start = time.time()
 scriptpath = os.path.dirname(os.path.abspath(__file__))
 
 #Paths to input and output data.
-shapedir = '/home/hub-bjarkithorh/hycamp/team/bjarkith/RSLE/GIS/basin_shp_loop'
-shpfinish = '/home/hub-bjarkithorh/hycamp/team/bjarkith/RSLE/GIS/basin_shp_loop_finished'
-indem = '/home/hub-bjarkithorh/hycamp/team/bjarkith/RSLE/GIS/DEM/norgedem500align.tif' #DEM tif input
-outdem = os.path.join(scriptpath, 'norgedem_500m_catchm.tif')
-modisdir = '/home/hub-bjarkithorh/hycamp/team/bjarkith/RSLE/GIS/MODIS/MODISTiff'
-outmodis = os.path.join(scriptpath, 'buffmod.tif')
+shapedir = '/dir/to/catchment/shape/files/'
+shpfinish = '/dir/to/used/catchment/shape/files'
+indem = '/path/to/dem/covering/cathments.tif' #DEM tif input
+outdem = os.path.join(scriptpath, 'temporary_catchm.tif')
+modisdir = '/dir/to/modis/snow/cover/tif/files'
+outmodis = os.path.join(scriptpath, 'buffer_mod.tif')
+result_path = '/dir/to/where/result/files/are/saved/'
 
-#Add input and output projections of MODIS
-#inputprojmod = '"+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_def"'
-#outputprojmod = '"+proj=utm +zone=32 +datum=WGS84 +units=m +no_defs"'
+#Make shure all files, shape, dem and modis are in the same projection.
 
 #Make a list of shape files
 shpfiles = os.listdir(shapedir)
@@ -122,7 +121,7 @@ for shapef in os.listdir(shapedir):
         nidurst = [nidur_modis, nidur_rsle, nidur_snow, nidur_land, nidur_cloud]
         fin_nid = pd.concat(nidurst, axis=1)
         print(fin_nid)
-        resultcsv = '/home/hub-bjarkithorh/hycamp/team/bjarkith/RSLE/Results/Modis/result' + basinshape + '.csv' #Name of the outputfile
+        resultcsv = result_path + basinshape + '.csv' #Name of the outputfile
         fin_nid.to_csv(path_or_buf=resultcsv, sep=',')
         shp_move = basinshape[:-4]
         for f in shpfiles:
