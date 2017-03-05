@@ -7,8 +7,8 @@ import os.path
 
 #Directories of import files and output files
 
-raw_results = '/home/hub-bjarkithorh/hycamp/team/bjarkith/RSLE/Results/comb_results/'
-output_results = '/home/hub-bjarkithorh/hycamp/team/bjarkith/RSLE/melt_period/melt_period_senorge/'
+raw_results = '/path/to/input/files/'
+output_results = '/path/to/output/files/'
 
 #Loop through the result files and process each one.
 
