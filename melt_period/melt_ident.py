@@ -7,8 +7,14 @@ import os.path
 
 #Directories of import files and output files
 
-raw_results = '/path/to/input/files/'
-output_results = '/path/to/output/files/'
+raw_results = '/home/hub-bjarkithorh/hycamp/team/bjarkith/RSLE/Results/comb_results/'
+output_results = '/home/hub-bjarkithorh/hycamp/team/bjarkith/RSLE/melt_period/test/'
+
+#Create arrays for the average slope
+
+aver_catch = np.array([])
+aver_slope = np.array([])
+vari_slope = np.array([])
 
 #Loop through the result files and process each one.
 
@@ -29,21 +35,21 @@ for res in os.listdir(raw_results):
 
         #Make an object including only the S_RSLE series
 
-        rsle = data[::-1]
-        rsle = rsle.shift(-2)
+        s_rsle = data[::-1]
+        s_rsle = s_rsle.shift(-2)
 
         #Create an empty array to store mask data in.
         melt_mask = []
 
         #Shift the S_RSLE up by one day
-        shift_data = data.shift(1)
+        S_RSLE_p1 = data.shift(1)
 
         #Loop through the S_RSLE and identify where the slope 
         #of the series is positive, negative or constant.
 
-        for a, b in zip(data, shift_data):
+        for a, b in zip(data, S_RSLE_p1):
           if a - b > 0:
-          	melt_mask.append(a)
+            melt_mask.append(a)
           elif a - b < 0:
             melt_mask.append(a)
           else:
@@ -53,12 +59,12 @@ for res in os.listdir(raw_results):
 
         melt_mask = np.array(melt_mask)
 
-        #Make the array a numpy array.
+        #Convert the zeros in the array to NaN values.
 
-        melt_mask = np.array(melt_mask)
+        melt_mask[melt_mask == 0] = np.nan
 
-		#Convert the Date column into a numpy array and 
-		#combine melt and date in a DataFrame.
+        #Convert the Date column into a numpy array and 
+        #combine melt and date in a DataFrame.
 
         melt_mask = pd.DataFrame(data=melt_mask, columns=['MeltP'])
         date = result['Date'].tolist()
@@ -71,7 +77,8 @@ for res in os.listdir(raw_results):
         melt_mask = melt_mask[::-1]
         melt_mask = melt_mask.shift(-2)
 
-        #Select the years that you want to use.
+        #Loop through the data and from 31.August find the closest
+        #max elevation.
 
         years = [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 
                  2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016]
@@ -101,18 +108,18 @@ for res in os.listdir(raw_results):
             min = year_ts.min()
             max = year_ts.max()
 
-            for i, a in zip(data, re_year.index):
+            for i, a in zip(re_year['MeltP'], re_year.index):
                 if i == max:
                     end = np.append(end, a)
                     break
-            re_year_sec = rsle[a:st]
+            re_year_sec = s_rsle[a:st]
             for i, b in zip(re_year_sec, re_year_sec.index):
                 day_count = day_count + 1
                 if i == min:
                     begin = np.append(begin, b)
                     break
             day_count_arr = np.array([day_count])
-			
+            
             #Calculate the slope
             slope = day_count / (max-min)
             slope = np.array([slope])
@@ -129,7 +136,30 @@ for res in os.listdir(raw_results):
             nidur.set_index(['Year'])
 
             results = pd.concat([results, nidur], axis=0)
+
+        #Lets take the average and variance of the slope for the cathment
+        #over the whole period.
+
+        slope_average = results['Slope'].mean()
+        slope_variance = results['Slope'].var()
+
+        aver_catch = np.append(aver_catch, catch[:-4])
+        aver_slope = np.append(aver_slope, slope_average)
+        vari_slope = np.append(vari_slope, slope_variance)
+
         print(results)
         resultcsv = output_results + 'melt_' + catch #Name of the outputfile
         results.to_csv(path_or_buf=resultcsv, sep=',')
+
+#Gather the averages into DataFrames and save the output.
+catchment_df = pd.DataFrame(data=aver_catch, columns=['Catchment'])
+aver_slope_df = pd.DataFrame(data=aver_slope, columns=['Average slope'])
+vari_slope_df = pd.DataFrame(data=vari_slope, columns=['Variance of slope'])
+
+aver_concat_list = [catchment_df, aver_slope_df, vari_slope_df]
+aver_result = pd.concat(aver_concat_list, axis=1)
+
+ave_resultcsv = output_results + 'slope_average_variance.csv'
+aver_result.to_csv(path_or_buf=ave_resultcsv, sep=',')
+
 print('Everything has melted...')
