@@ -7,8 +7,8 @@ import os.path
 
 #Directories of import files and output files
 
-raw_results = '/home/hub-bjarkithorh/hycamp/team/bjarkith/RSLE/Results/comb_results/'
-output_results = '/home/hub-bjarkithorh/hycamp/team/bjarkith/RSLE/melt_period/test/'
+raw_results = '/dir/to/RSLE/Results/comb_results/'
+output_results = '/dir/to/RSLE/melt_period/test/'
 
 #Create arrays for the average slope
 

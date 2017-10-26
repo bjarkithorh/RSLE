@@ -8,26 +8,26 @@ import shutil
 
 #Directories to various input and output files.
 
-scriptpath = '/uio/lagringshotell/geofag/projects/hycamp/team/bjarkith/RSLE/senorge/'
+scriptpath = '/dir/to/RSLE/senorge/'
 
-indem = '/uio/lagringshotell/geofag/projects/hycamp/team/bjarkith/RSLE/GIS/DEM/norgedem500align33.tif'
+indem = '/dir/to/RSLE/GIS/DEM/norgedem500align33.tif'
 outdem =  os.path.join(scriptpath, 'bufferdem.tif')
-shapedir = '/uio/lagringshotell/geofag/projects/hycamp/team/bjarkith/RSLE/GIS/basin_shp_senorge/'
-shpfinish = '/uio/lagringshotell/geofag/projects/hycamp/team/bjarkith/RSLE/GIS/basin_shp_senorge_finished/'
-senorgetmdir = '/uio/lagringshotell/geofag/projects/hycamp/team/bjarkith/RSLE/senorge/tm_1.1/daily/mask/'
+shapedir = '/dir/to/RSLE/GIS/basin_shp_senorge/'
+shpfinish = '/dir/to/RSLE/GIS/basin_shp_senorge_finished/'
+senorgetmdir = '/dir/to/RSLE/senorge/tm_1.1/daily/mask/'
 senorgetmout =  os.path.join(scriptpath, 'buffersenorgetm.tif')
-senorgeswedir = '/uio/lagringshotell/geofag/projects/hycamp/team/bjarkith/RSLE/senorge/swe_1.1.1/daily/mask/'
+senorgeswedir = '/dir/to/RSLE/senorge/swe_1.1.1/daily/mask/'
 senorgesweout = os.path.join(scriptpath, 'buffersenorgeswe.tif')
-senorgerrscdir = '/uio/lagringshotell/geofag/projects/hycamp/team/bjarkith/RSLE/senorge/rrsc_1.1/daily/mask/'
+senorgerrscdir = '/dir/to/RSLE/senorge/rrsc_1.1/daily/mask/'
 senorgerrscout = os.path.join(scriptpath, 'buffersenorgerrsc.tif')
-senorgerrldir = '/uio/lagringshotell/geofag/projects/hycamp/team/bjarkith/RSLE/senorge/rrl_1.1/daily/mask/'
+senorgerrldir = '/dir/to/RSLE/senorge/rrl_1.1/daily/mask/'
 senorgerrlout = os.path.join(scriptpath, 'buffersenorgerrl.tif')
-senorgerrdir = '/uio/lagringshotell/geofag/projects/hycamp/team/bjarkith/RSLE/senorge/rr_1.1/daily/mask/'
+senorgerrdir = '/dir/to/RSLE/senorge/rr_1.1/daily/mask/'
 senorgerrout = os.path.join(scriptpath, 'buffersenorgerr.tif')
-senorgegwbqdir = '/uio/lagringshotell/geofag/projects/hycamp/team/bjarkith/RSLE/senorge/gwb_q_1.1/daily/mask/'
+senorgegwbqdir = '/dir/to/RSLE/senorge/gwb_q_1.1/daily/mask/'
 senorgegwbqout = os.path.join(scriptpath, 'buffersenorgegwbq.tif')
 
-result_directory = '/uio/lagringshotell/geofag/projects/hycamp/team/bjarkith/RSLE/Results/Senorge/'
+result_directory = '/dir/to/RSLE/Results/Senorge/'
 
 #Here we begin to loop through the catchments.
 

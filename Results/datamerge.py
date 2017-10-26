@@ -7,11 +7,11 @@ import os
 import os.path
 
 #Direcotries to the result files
-moddir = '/uio/lagringshotell/geofag/projects/hycamp/team/bjarkith/RSLE/Results/Modis/'
-sscadir = '/uio/lagringshotell/geofag/projects/hycamp/team/bjarkith/RSLE/Results/Senorgesca/'
-sendir = '/uio/lagringshotell/geofag/projects/hycamp/team/bjarkith/RSLE/Results/Senorge/'
-sqdir = '/uio/lagringshotell/geofag/projects/hycamp/team/bjarkith/RSLE/Results/Senorgeq/'
-finresdir = '/uio/lagringshotell/geofag/projects/hycamp/team/bjarkith/RSLE/Results/comb_results/'
+moddir = '/dir/to/RSLE/Results/Modis/'
+sscadir = '/dir/to/RSLE/Results/Senorgesca/'
+sendir = '/dir/to/RSLE/Results/Senorge/'
+sqdir = '/dir/to/RSLE/Results/Senorgeq/'
+finresdir = '/dir/to/RSLE/Results/comb_results/'
 
 #The endfix for the output csv files.
 fix = '.csv'
